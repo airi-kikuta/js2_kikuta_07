@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>tweet diary</title>
+    <script src="https://kit.fontawesome.com/b506f38d23.js" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+
+
+
+<main>
+    <header>
+        <i class="fab fa-twitter" ></i>
+    </header>
+
+   
+    <lavel>
+        <input type="date" id="date">
+    </label>
+
+
+    <div class="content">
+        <textarea id = "text" placeholder="いまどうしてる？"></textarea>
+    </div>
+
+    <div class="icon_wrapper">
+        <i class="far fa-save" id = "save"></i>
+        <i class="far fa-trash-alt" id = "clear"></i>
+    </div>
+
+</main>
+<table id="list"></table>
+
+<script>
+
+// save----------------------------------
+
+$("#save").on("click", function () {
+
+const key = $("#date").val();
+const value = $("#text").val();
+localStorage.setItem(key, value);
+
+const html = `
+<tr>
+    <th>${date}</th> 
+    <td>${text}</td> 
+</tr>
+`;
+
+$("#list").append(html);
+});
+
+
+// clear----------------------------------
+
+$("#clear").on("click", function () {
+    localStorage.clear();   
+    $("#list").empty();
+ });
+
+
+// load----------------------------------
+
+for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    const value = localStorage.getItem(key);
+
+    const html = `
+    <tr>
+        <th>${key}</th>
+        <td>${value}</td>
+    </tr>
+    `;
+
+$("#list").append(html);
+}
+
+
+
+</script>
+<footer><small></small></footer>
+</body>
+</html>
+
+
+
+
